@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studentNameSpace">
+
+	<insert id="insertStudent" parameterType="studentReq">
+		insert into student(student_id,student_name,student_dob,student_gender,student_phone,student_education)
+		values(#{studentId},#{studentName},#{studentDob},#{studentGender},#{studentPhone},#{studentEducation})
+	</insert>
+	
+	<insert id="insertStudCourse" parameterType="scReq">
+		insert into student_has_course(student_student_id,course_course_id)
+		values(#{studentId},#{courseId})
+	</insert>
+	
+	<update id="updateStudent" parameterType="sBean">
+		update student set student_name = #{studentName},student_dob = #{studentDob},student_gender = #{studentGender},student_phone = #{studentPhone},student_education = #{studentEducation} where student_id = #{studentId}
+	</update>
+	
+	<delete id="deleteStudent" parameterType="sBean">
+		delete from student where student_id = #{studentId}
+	</delete>
+	
+	<delete id="deleteStudCourse" parameterType="sBean">
+		delete from student_has_course where student_student_id = #{studentId}
+	</delete>
+	
+	<select id="selectAllStudent" resultMap="StudentResult">
+		select * from student
+	</select>
+	
+	<select id="allStudCourse" resultMap="scResult">
+		select sc.student_student_id ,sc.course_course_id, c.course_name
+		from mydb.student_has_course sc
+		join mydb.course c
+		on  sc.course_course_id = c.course_id
+	</select>
+	
+	<resultMap type="scRes" id="scResult">
+		<result property="studentId" column="student_student_id" />
+		<result property="courseId" column="course_course_id" />
+		<result property="courseName" column="course_name" />
+	</resultMap>
+	
+	<resultMap type="studentRes" id="StudentResult">
+		<result property="studentId" column="student_id" />
+		<result property="studentName" column="student_name" />
+		<result property="studentDob" column="student_dob" />
+		<result property="studentGender" column="student_gender" />
+		<result property="studentPhone" column="student_phone" />
+		<result property="studentEducation" column="student_education" />
+	</resultMap>
+
+</mapper>

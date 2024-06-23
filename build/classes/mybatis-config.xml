@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="studentManagement.persistant.dto.UserRequestDTO" alias="userReq" />
+		<typeAlias type="studentManagement.persistant.dto.UserResponseDTO" alias="userRes" />
+		<typeAlias type="studentManagement.persistant.dto.CourseRequestDTO" alias="courseReq" />
+		<typeAlias type="studentManagement.persistant.dto.CourseResponseDTO" alias="courseRes" />
+		<typeAlias type="studentManagement.persistant.dto.StudentRequestDTO" alias="studentReq" />
+		<typeAlias type="studentManagement.persistant.dto.StudentResponseDTO" alias="studentRes" />
+		<typeAlias type="studentManagement.persistant.dto.StudCourseRequestDTO" alias="scReq" />
+		<typeAlias type="studentManagement.persistant.dto.StudCourseResponseDTO" alias="scRes" />
+		<typeAlias type="studentManagement.model.StudentBean" alias="sBean" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://localhost:3306/mydb" />
+				<property name="username" value="root" />
+				<property name="password" value="136968" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="studentManagement/persistant/dao/UserMapper.xml" />
+		<mapper resource="studentManagement/persistant/dao/CourseMapper.xml" />
+		<mapper resource="studentManagement/persistant/dao/StudentMapper.xml" />
+	</mappers>
+</configuration>

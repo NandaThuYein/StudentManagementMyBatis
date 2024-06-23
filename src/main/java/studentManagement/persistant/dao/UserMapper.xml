@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userNameSpace">
+
+	<insert id="insertUser" parameterType="userReq">
+		insert into user(user_id,user_name,user_email,user_password,user_role)
+		values(#{userId},#{userName},#{userEmail},#{userPassword},#{userRole})
+	</insert>
+	
+	<update id="updateUser" parameterType="userReq">
+		update user set user_name = #{userName},user_email = #{userEmail},user_password = #{userPassword},user_role = #{userRole} where user_id = #{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="userReq">
+		delete from user where user_id = #{userId}
+	</delete>
+	
+	<select id="searchUser" parameterType="userReq" resultMap="LoginResult">
+		select * from user where user_id = #{userId} or user_name = #{userName}
+	</select>
+
+	<select id="userLogin" resultMap="LoginResult" parameterType="userReq">
+		select user_id,user_name from user where user_name = #{userName} and user_password = #{userPassword}
+	</select>
+
+	<resultMap type="userRes" id="LoginResult">
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userEmail" column="user_email" />
+		<result property="userPassword" column="user_password" />
+		<result property="confPassword" column="user_password" />
+		<result property="userRole" column="user_role" />
+	</resultMap>
+
+</mapper>
